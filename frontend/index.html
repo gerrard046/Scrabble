@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrabble-X | Word Finder</title>
+  <meta name="description" content="Scrabble word finder dengan sistem skor. Masukkan tile kamu dan temukan semua kata yang bisa dibentuk beserta nilainya." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Background blobs -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <div class="app-wrapper">
+
+    <!-- ── HEADER ── -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-tiles">
+          <span class="logo-tile" style="--i:0">S</span>
+          <span class="logo-tile" style="--i:1">C</span>
+          <span class="logo-tile" style="--i:2">R</span>
+          <span class="logo-tile" style="--i:3">A</span>
+          <span class="logo-tile" style="--i:4">B</span>
+          <span class="logo-tile" style="--i:5">B</span>
+          <span class="logo-tile" style="--i:6">L</span>
+          <span class="logo-tile" style="--i:7">E</span>
+          <span class="logo-tile logo-tile--accent" style="--i:8">X</span>
+        </div>
+        <p class="tagline">Scrabble Word Finder &amp; Scorer</p>
+      </div>
+    </header>
+
+    <!-- ── INPUT SECTION ── -->
+    <section class="input-section">
+      <div class="input-card glass">
+
+        <div class="tile-display" id="tileDisplay" aria-label="Tile preview">
+          <span class="tile-hint">Ketik tile di bawah...</span>
+        </div>
+
+        <div class="input-row">
+          <div class="input-wrapper">
+            <input
+              id="rackInput"
+              type="text"
+              maxlength="7"
+              placeholder="Contoh: QUARTZ atau AEIN??T"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="characters"
+              spellcheck="false"
+              aria-label="Masukkan tile Scrabble"
+            />
+            <span class="input-counter" id="inputCounter">0 / 7</span>
+          </div>
+          <button class="btn-solve" id="btnSolve" aria-label="Cari kata">
+            <span class="btn-text">SOLVE</span>
+            <span class="btn-icon">&#9658;</span>
+          </button>
+          <button class="btn-clear" id="btnClear" aria-label="Hapus input" title="Clear">&#10005;</button>
+        </div>
+
+        <div class="options-row">
+          <label class="option-chip" for="minLen">
+            Min panjang:
+            <select id="minLen">
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+          <label class="option-chip" for="sortBy">
+            Urut:
+            <select id="sortBy">
+              <option value="score">Skor tertinggi</option>
+              <option value="length">Panjang kata</option>
+              <option value="alpha">Alfabetis</option>
+            </select>
+          </label>
+          <div class="blank-hint">
+            <span class="key">?</span> = blank tile (wildcard)
+          </div>
+        </div>
+
+        <div class="error-msg" id="errorMsg" role="alert" hidden></div>
+      </div>
+    </section>
+
+    <!-- ── LOADING ── -->
+    <div class="loading" id="loading" hidden>
+      <div class="spinner"></div>
+      <p>Mencari kata...</p>
+    </div>
+
+    <!-- ── RESULTS ── -->
+    <section class="results-section" id="resultsSection" hidden>
+
+      <!-- Stats bar -->
+      <div class="stats-bar glass">
+        <div class="stat">
+          <span class="stat-num" id="statTotal">0</span>
+          <span class="stat-label">Kata ditemukan</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" id="statBest">-</span>
+          <span class="stat-label">Kata terbaik</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" id="statBestScore">0</span>
+          <span class="stat-label">Skor tertinggi</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" id="statBingo">0</span>
+          <span class="stat-label">BINGO (7 huruf)</span>
+        </div>
+      </div>
+
+      <!-- Groups container -->
+      <div class="groups-container" id="groupsContainer"></div>
+
+    </section>
+
+    <!-- ── SCORE REFERENCE ── -->
+    <section class="score-ref glass">
+      <h3 class="score-ref-title">Nilai Huruf</h3>
+      <div class="score-grid" id="scoreGrid"></div>
+    </section>
+
+    <footer class="footer">
+      <p>Scrabble-X v2.0 &mdash; 370,079 kata dalam kamus &mdash; dibuat dengan &#10084; dan vibe coding</p>
+    </footer>
+
+  </div><!-- /app-wrapper -->
+
+  <script src="app.js"></script>
+</body>
+</html>
