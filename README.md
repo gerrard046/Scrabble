@@ -14,6 +14,7 @@ Cari semua kata valid dari tile Scrabble kamu, lengkap dengan **skor poin** seti
 - 📦 **Grouped by length** — hasil dikelompokkan dari pendek ke Bingo (7 huruf)
 - 🌐 **REST API** — endpoint FastAPI yang async dan proper
 - 🖥️ **CLI interaktif** — tampilan berwarna dengan loop REPL
+- 🎨 **Web UI** — antarmuka web modern Vanilla JS (Glassmorphism)
 
 ---
 
@@ -39,6 +40,13 @@ Atau dengan uvicorn langsung:
 uvicorn api:app --reload
 ```
 Buka Swagger UI: http://127.0.0.1:8000/docs
+
+### Mode Web UI
+Pastikan API sudah berjalan. Buka file `frontend/index.html` di browser atau serve dengan HTTP server:
+```bash
+python -m http.server 3000
+```
+Lalu buka http://localhost:3000 (Pastikan `API_BASE` pada `frontend/app.js` sudah sesuai dengan alamat API Anda).
 
 ---
 
@@ -92,6 +100,7 @@ SCRABBLEVIBECODING/
 ├── main.py          # CLI interaktif
 ├── api.py           # FastAPI REST API
 ├── requirements.txt
+├── frontend/        # Web UI (HTML/CSS/JS)
 ├── data/
 │   └── dictionary.txt
 └── README.md
