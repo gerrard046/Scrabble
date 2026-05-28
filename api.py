@@ -63,8 +63,6 @@ FRONTEND_DIR = Path(__file__).parent / "frontend"
 #  Endpoints
 # ============================================================
 
-app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
-
 
 @app.get("/solve/{tiles}", summary="Cari kata dari tile")
 async def solve(
@@ -151,6 +149,9 @@ async def letter_values():
         "note": "Blank tile (?) bernilai 0 poin tapi bisa menggantikan huruf apapun."
     }
 
+
+# Mount static files terakhir agar tidak shadowing endpoint API
+app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
 # ============================================================
 if __name__ == "__main__":
